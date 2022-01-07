@@ -31,7 +31,7 @@ public class Rings : MonoBehaviour
             GameObject newRing = Instantiate(
                 ring,
                 new Vector3(0, (i+1) * 1.2f, 0),
-                Quaternion.Euler(0,(i+1)*15f,0),
+                Quaternion.Euler(0,(i+1)*8f,0),
                 transform);
             ringList.Add(newRing);
         }
