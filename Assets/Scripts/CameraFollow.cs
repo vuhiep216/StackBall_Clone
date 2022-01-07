@@ -26,7 +26,7 @@ public class CameraFollow : MonoBehaviour
         }
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         isFlw = true;
         if (ball.transform.position.y < minY)
@@ -39,7 +39,9 @@ public class CameraFollow : MonoBehaviour
         }
         if (isFlw)
         {
-            transform.position = ball.transform.position + offset;
+            var target = ball.transform.position + offset;
+            transform.position = Vector3.Lerp(transform.position,target,Time.deltaTime*4.5f);
+            transform.LookAt(ball.transform);
         }
     }
 }

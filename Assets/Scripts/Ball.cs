@@ -58,7 +58,8 @@ public class Ball : MonoBehaviour
                     foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
                     {
                         rbc.isKinematic = false;
-                        rbc.AddForce(new Vector3(1,-1,1)*10000f);
+                        rbc.freezeRotation = true;
+                        rbc.AddForce(new Vector3(0,-1,5)*500f);
                     }
                     rings.ringList.Remove(rings.ringList.Last());
 

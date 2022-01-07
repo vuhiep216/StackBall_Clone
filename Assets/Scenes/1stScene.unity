@@ -2846,7 +2846,7 @@ PrefabInstance:
       objectReference: {fileID: 757999283}
     - target: {fileID: 3204250169695788247, guid: 1f767fd694018d34692b3fe609c3dde7, type: 3}
       propertyPath: spinSpd
-      value: 180
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 3468959853249065216, guid: 1f767fd694018d34692b3fe609c3dde7, type: 3}
       propertyPath: m_Materials.Array.data[0]
