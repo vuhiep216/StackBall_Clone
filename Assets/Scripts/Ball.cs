@@ -60,8 +60,9 @@ public class Ball : MonoBehaviour
                     {
                         ring1.GetComponent<Ring>().spinSpd = 0;
                         rbc.isKinematic = false;
-                        rbc.AddForce(new Vector3(0,-1,0)*500f);
+                        rbc.AddForce(new Vector3(0,1,0)*500f);
                         rbc.AddForce(new Vector3(0,0,10)*500f);
+                        ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
 
                     }
                     rings.ringList.Remove(rings.ringList.Last());
@@ -90,10 +91,10 @@ public class Ball : MonoBehaviour
                 stop = true;
                 Debug.Log("Load scene");
             }
-            if (col.gameObject.CompareTag("Point"))
+            /*if (col.gameObject.CompareTag("Point"))
             {
-                Destroy(col.transform.parent.gameObject);
-            }
+                Destroy(col.gameObject);
+            }*/
 
         }
         if (col.gameObject.CompareTag(("Ground")))

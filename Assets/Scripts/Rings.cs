@@ -6,18 +6,17 @@ public class Rings : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField] private GameObject ring;
+    public Ring rings;
     public List<GameObject> ringList = new List<GameObject>();
     void Start()
     {
         ringSpawn(20);
-
-
+        rings = Resources.Load<Ring>("Level");
     }
 
     // Update is called once per frame
     void Update()
     {
-
 
     }
 
