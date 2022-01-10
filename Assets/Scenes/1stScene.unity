@@ -1002,6 +1002,7 @@ MonoBehaviour:
   jumpPwr: 8
   dwnPwr: 30
   rings: {fileID: 1662519209}
+  r: {fileID: 757999285}
   ball: {fileID: 657615307}
   ring: {fileID: 757999283}
   completelevelUI: {fileID: 590562775}
@@ -1118,6 +1119,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3468959853251325890, guid: 1f767fd694018d34692b3fe609c3dde7, type: 3}
   m_PrefabInstance: {fileID: 2028031809394070972}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &757999285 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3204250169695788247, guid: 1f767fd694018d34692b3fe609c3dde7, type: 3}
+  m_PrefabInstance: {fileID: 2028031809394070972}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757999283}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 501a4bb671a80a046a1eec4158dacabf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &863700514 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7678801734035990563, guid: 1f767fd694018d34692b3fe609c3dde7, type: 3}

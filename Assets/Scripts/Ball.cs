@@ -11,9 +11,9 @@ public class Ball : MonoBehaviour
     [SerializeField] private float jumpPwr;
     [SerializeField] private float dwnPwr;
     [SerializeField] private Rings rings;
+    [SerializeField] private Ring r;
 
     public GameObject ball;
-    public GameObject ring;
     public GameObject completelevelUI;
     public GameObject failLevelUI;
 
@@ -53,13 +53,16 @@ public class Ball : MonoBehaviour
             {
                 var ring1 = rings.ringList.Last();
                 rb.velocity = Vector3.up *-dwnPwr;
+                var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
                 if (ball.transform.position.y < (ring1.transform.position.y+1f))
                 {
                     foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
                     {
+                        ring1.GetComponent<Ring>().spinSpd = 0;
                         rbc.isKinematic = false;
-                        rbc.freezeRotation = true;
-                        rbc.AddForce(new Vector3(0,-1,5)*500f);
+                        rbc.AddForce(new Vector3(0,-1,0)*500f);
+                        rbc.AddForce(new Vector3(0,0,10)*500f);
+
                     }
                     rings.ringList.Remove(rings.ringList.Last());
 
