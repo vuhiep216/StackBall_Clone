@@ -10,8 +10,7 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private float jumpPwr;
     [SerializeField] private float dwnPwr;
-    [SerializeField] private Rings rings;
-    [SerializeField] private Ring r;
+    [SerializeField] public Ring ring;
 
     public GameObject ball;
     public GameObject completelevelUI;
@@ -49,23 +48,23 @@ public class Ball : MonoBehaviour
 
         if (click)
         {
-            if (rings.ringList.Count>0)
+            if (ring.ringList.Count>0)
             {
-                var ring1 = rings.ringList.Last();
+                var ring1 = ring.ringList.Last();
                 rb.velocity = Vector3.up *-dwnPwr;
                 var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
                 if (ball.transform.position.y < (ring1.transform.position.y+1f))
                 {
                     foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
                     {
-                        ring1.GetComponent<Ring>().spinSpd = 0;
+                        ring1.GetComponent<Rings>().spinSpd = 0;
                         rbc.isKinematic = false;
                         rbc.AddForce(new Vector3(0,1,0)*500f);
                         rbc.AddForce(new Vector3(0,0,10)*500f);
                         ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
 
                     }
-                    rings.ringList.Remove(rings.ringList.Last());
+                    ring.ringList.Remove(ring.ringList.Last());
 
                 }
             }

@@ -9,6 +9,7 @@ TagManager:
   - Ring
   - Ground
   - brkRing
+  - Rings
   layers:
   - Default
   - TransparentFX
