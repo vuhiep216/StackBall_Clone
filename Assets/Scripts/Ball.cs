@@ -93,8 +93,6 @@ public class Ball : MonoBehaviour
 
     public void LoadNextScene()
     {
-        ring.lv++;
-        Debug.Log(ring.lv);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
