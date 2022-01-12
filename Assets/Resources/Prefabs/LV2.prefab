@@ -108,7 +108,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5da8a987b14ac943919cebb1c5d4512, type: 2}
+  - {fileID: 2100000, guid: 9aaebe13c1522224db0f9e642a702789, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,7 +170,7 @@ GameObject:
   - component: {fileID: 869279601978061880}
   - component: {fileID: 869279601978061881}
   m_Layer: 0
-  m_Name: LV1
+  m_Name: LV2
   m_TagString: Rings
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -377,7 +377,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e5da8a987b14ac943919cebb1c5d4512, type: 2}
+  - {fileID: 2100000, guid: 9aaebe13c1522224db0f9e642a702789, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

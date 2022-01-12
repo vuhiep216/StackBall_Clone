@@ -11,6 +11,4 @@ public class Rings : MonoBehaviour
     {
         transform.Rotate((new Vector3(0f, spinSpd, 0f) * Time.deltaTime));
     }
-
-
 }

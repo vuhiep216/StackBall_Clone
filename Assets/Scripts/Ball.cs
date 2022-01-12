@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] private float jumpPwr;
     [SerializeField] private float dwnPwr;
-    [SerializeField] public Ring ring;
+    [SerializeField] public Level ring;
 
     public GameObject ball;
     public GameObject completelevelUI;
@@ -22,8 +22,7 @@ public class Ball : MonoBehaviour
 
     private Rigidbody rb;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         rb = GetComponent<Rigidbody>();
         completelevelUI.SetActive(false);
@@ -72,12 +71,6 @@ public class Ball : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    private void FixedUpdate()
-    {
-
-    }
-
     private void OnCollisionEnter(Collision col)
     {
         rb.velocity =Vector3.up *jumpPwr;
@@ -90,11 +83,6 @@ public class Ball : MonoBehaviour
                 stop = true;
                 Debug.Log("Load scene");
             }
-            /*if (col.gameObject.CompareTag("Point"))
-            {
-                Destroy(col.gameObject);
-            }*/
-
         }
         if (col.gameObject.CompareTag(("Ground")))
         {
@@ -105,7 +93,9 @@ public class Ball : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        ring.lv++;
+        Debug.Log(ring.lv);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void ReloadScene()
