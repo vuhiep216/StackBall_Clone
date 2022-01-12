@@ -16,14 +16,20 @@ public class Ball : MonoBehaviour
     public GameObject completelevelUI;
     public GameObject failLevelUI;
 
+    public DataManager dataManager;
+
     private bool click;
     private bool gameIsP;
     private bool stop=false;
 
+    private int lvs;
+
     private Rigidbody rb;
 
-    private void Start()
+    void Start()
     {
+        dataManager.Load();
+        lvs = dataManager.data.LV;
         rb = GetComponent<Rigidbody>();
         completelevelUI.SetActive(false);
         failLevelUI.SetActive(false);
@@ -93,11 +99,13 @@ public class Ball : MonoBehaviour
 
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //
     }
 
     public void ReloadScene()
     {
+        dataManager.data.LV = lvs + 1;
+        dataManager.Save();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     public void PauseGame()

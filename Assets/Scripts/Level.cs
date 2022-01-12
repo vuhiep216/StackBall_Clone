@@ -9,11 +9,13 @@ public class Level : MonoBehaviour
 {
     private GameObject ring;
     public List<GameObject> ringList = new List<GameObject>();
-    private int lv=1;
+    public DataManager dataManager;
+    public int lv;
 
     public void Start()
     {
-
+        dataManager.Load();
+        lv = dataManager.data.LV;
         ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
         ringSpawn(20);
     }
