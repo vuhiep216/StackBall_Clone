@@ -54,3 +54,13 @@ public class DataManager : MonoBehaviour
         return Application.persistentDataPath + "/" + fileName;
     }
 }
+/*How to use JSON
+    dataManager.Load();
+    lvs = dataManager.data.LV;
+    dataManager.Load();
+    lv = dataManager.data.LV;
+    public DataManager dataManager;
+    public DataManager dataManager;
+    dataManager.data.LV = lvs + 1;
+    dataManager.Save();
+*/
