@@ -12,18 +12,20 @@ public class Level : MonoBehaviour
     public List<GameObject> ringList = new List<GameObject>();
     public int lv=1;
 
+
     public void Start()
     {
-        var check = PlayerPrefs.GetString("Level");
-        if (check is null)
+        var check = PlayerPrefs.GetInt("Level");
+        if (check ==0)
         {
             PlayerPrefs.SetInt("Level",1);
         }
         lv=PlayerPrefs.GetInt("Level");
-        Debug.Log(lv);
-        if (lv > 2) lv = 2;
-        ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
-        ringSpawn(20);
+            Debug.Log(lv);
+            if (lv > 2) lv = 2;
+            ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
+            ringSpawn(20);
+
     }
 
     void ringSpawn(int ringNum)
@@ -46,6 +48,7 @@ public class Level : MonoBehaviour
         var nlv = lv+1;
         PlayerPrefs.SetInt("Level",nlv);
         SceneManager.LoadScene("GamePlay");
+
     }
     public void ReloadScene()
     {

@@ -24,9 +24,10 @@ public class Ball : MonoBehaviour
 
     private Rigidbody rb;
 
+
+
     void Start()
     {
-
         rb = GetComponent<Rigidbody>();
         completelevelUI.SetActive(false);
         failLevelUI.SetActive(false);
@@ -50,6 +51,7 @@ public class Ball : MonoBehaviour
 
         if (click)
         {
+            rb.AddForce(Vector3.down*(8f/220f)*10f);
             if (ring.ringList.Count>0)
             {
                 var ring1 = ring.ringList.Last();
