@@ -204,7 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 501a4bb671a80a046a1eec4158dacabf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spinSpd: 220
+  spinSpd: 240
 --- !u!1 &3121943821838390326
 GameObject:
   m_ObjectHideFlags: 0

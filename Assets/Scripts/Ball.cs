@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float jumpPwr;
     [SerializeField] private float dwnPwr;
     [SerializeField] public Level ring;
+    [SerializeField] private float spdDown;
 
     public GameObject ball;
     public GameObject completelevelUI;
@@ -51,9 +52,10 @@ public class Ball : MonoBehaviour
 
         if (click)
         {
-            rb.AddForce(Vector3.down*(8f/220f)*10f);
+           rb.AddForce(Vector3.down*spdDown);
             if (ring.ringList.Count>0)
             {
+                //disableRigid();
                 var ring1 = ring.ringList.Last();
                 rb.velocity = Vector3.up *-dwnPwr;
                 var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
@@ -66,7 +68,6 @@ public class Ball : MonoBehaviour
                         rbc.AddForce(new Vector3(0,1,0)*500f);
                         rbc.AddForce(new Vector3(0,0,10)*500f);
                         ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
-
                     }
                     ring.ringList.Remove(ring.ringList.Last());
 
@@ -76,6 +77,12 @@ public class Ball : MonoBehaviour
         }
     }
 
+    void disableRigid()
+    {
+        rb.useGravity = false;
+        rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.isKinematic = true;
+    }
     private void OnCollisionEnter(Collision col)
     {
         rb.velocity =Vector3.up *jumpPwr;
@@ -88,6 +95,8 @@ public class Ball : MonoBehaviour
                 stop = true;
                 Debug.Log("Load scene");
             }
+
+
         }
         if (col.gameObject.CompareTag(("Ground")))
         {

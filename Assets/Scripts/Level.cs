@@ -9,13 +9,24 @@ using UnityEngine.UI;
 public class Level : MonoBehaviour
 {
     private GameObject ring;
+    private GameObject core;
     public List<GameObject> ringList = new List<GameObject>();
     public int lv=1;
 
 
     public void Start()
     {
-        var check = PlayerPrefs.GetInt("Level");
+        for (int i = 0 ;i < 30;i++)
+        {
+            core = Resources.Load<GameObject>("Prefabs/Cores");
+            GameObject newCore = Instantiate(
+            core,
+            new Vector3(0, i, 0),
+            Quaternion.identity,
+            transform);
+        }
+
+    var check = PlayerPrefs.GetInt("Level");
         if (check ==0)
         {
             PlayerPrefs.SetInt("Level",1);
@@ -37,22 +48,21 @@ public class Level : MonoBehaviour
 
             GameObject newRing = Instantiate(
                 ring,
-                new Vector3(0, i * 1.2f, 0),
+                new Vector3(0, i+0.05f, 0),
                 Quaternion.Euler(0,(i+1)*8f,0),
                 transform);
             ringList.Add(newRing);
         }
     }
+
     public void LoadNextScene()
     {
         var nlv = lv+1;
         PlayerPrefs.SetInt("Level",nlv);
         SceneManager.LoadScene("GamePlay");
-
     }
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
 }
