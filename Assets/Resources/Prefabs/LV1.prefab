@@ -686,9 +686,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 869279601978061880}
     m_Modifications:
+    - target: {fileID: 1302228959123821730, guid: eb940145fb25ee84481e2b3796084c80, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6804419329599233275, guid: eb940145fb25ee84481e2b3796084c80, type: 3}
       propertyPath: m_Name
       value: Ring
+      objectReference: {fileID: 0}
+    - target: {fileID: 8327800702223323625, guid: eb940145fb25ee84481e2b3796084c80, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8987265407312751160, guid: eb940145fb25ee84481e2b3796084c80, type: 3}
       propertyPath: m_RootOrder

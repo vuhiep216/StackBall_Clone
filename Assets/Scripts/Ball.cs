@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private float jumpPwr;
-    [SerializeField] private float dwnPwr;
+    //[SerializeField] private float dwnPwr;
     [SerializeField] public Level ring;
     [SerializeField] private float spdDown;
 
@@ -29,13 +29,15 @@ public class Ball : MonoBehaviour
 
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
+        rb = ball.GetComponent<Rigidbody>();
         completelevelUI.SetActive(false);
         failLevelUI.SetActive(false);
     }
 
     private void Update()
     {
+        rb.isKinematic = false;
+        rb.useGravity = true;
         Time.timeScale = 1;
         if (stop)
         {
@@ -52,12 +54,14 @@ public class Ball : MonoBehaviour
 
         if (click)
         {
-           rb.AddForce(Vector3.down*spdDown);
-            if (ring.ringList.Count>0)
+            disableRigid();
+            if (ring.ringList.Count>=0)
             {
-                //disableRigid();
+                //rb.AddForce(Vector3.down*spdDown);
+
+                ////rb.velocity = Vector3.down *dwnPwr;
                 var ring1 = ring.ringList.Last();
-                rb.velocity = Vector3.up *-dwnPwr;
+                transform.Translate(Vector3.down*spdDown*Time.deltaTime);
                 var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
                 if (ball.transform.position.y < (ring1.transform.position.y+1f))
                 {
@@ -73,7 +77,6 @@ public class Ball : MonoBehaviour
 
                 }
             }
-
         }
     }
 
@@ -81,8 +84,10 @@ public class Ball : MonoBehaviour
     {
         rb.useGravity = false;
         rb.constraints = RigidbodyConstraints.FreezeAll;
+        rb.constraints = ~RigidbodyConstraints.FreezePositionY;
         rb.isKinematic = true;
     }
+
     private void OnCollisionEnter(Collision col)
     {
         rb.velocity =Vector3.up *jumpPwr;
