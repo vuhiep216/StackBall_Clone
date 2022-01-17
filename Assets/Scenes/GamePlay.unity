@@ -838,7 +838,7 @@ GameObject:
   - component: {fileID: 657615309}
   - component: {fileID: 657615314}
   - component: {fileID: 657615313}
-  - component: {fileID: 657615315}
+  - component: {fileID: 657615308}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -846,6 +846,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!64 &657615308
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657615307}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!135 &657615309
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -956,20 +970,6 @@ MonoBehaviour:
   ball: {fileID: 657615307}
   completelevelUI: {fileID: 590562775}
   failLevelUI: {fileID: 566608654}
---- !u!64 &657615315
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 657615307}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -1220,7 +1220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.07369359, y: -0, z: -0, w: 0.99728096}
-  m_LocalPosition: {x: 0, y: 22.77, z: -10}
+  m_LocalPosition: {x: 0, y: 25.05, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

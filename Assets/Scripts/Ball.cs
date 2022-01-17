@@ -54,12 +54,12 @@ public class Ball : MonoBehaviour
 
         if (click)
         {
-            disableRigid();
-            if (ring.ringList.Count>=0)
-            {
-                //rb.AddForce(Vector3.down*spdDown);
 
-                ////rb.velocity = Vector3.down *dwnPwr;
+            if (ring.ringList.Count>0)
+            {
+                disableRigid();
+                //rb.AddForce(Vector3.down*spdDown);
+                //rb.velocity = Vector3.down *dwnPwr;
                 var ring1 = ring.ringList.Last();
                 transform.Translate(Vector3.down*spdDown*Time.deltaTime);
                 var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
@@ -68,14 +68,18 @@ public class Ball : MonoBehaviour
                     foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
                     {
                         ring1.GetComponent<Rings>().spinSpd = 0;
-                        rbc.isKinematic = false;
-                        rbc.AddForce(new Vector3(0,1,0)*500f);
-                        rbc.AddForce(new Vector3(0,0,10)*500f);
                         ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
+                        rbc.gameObject.layer = 3;
+
                     }
                     ring.ringList.Remove(ring.ringList.Last());
-
                 }
+                foreach( var rbBrnRing in GameObject.FindGameObjectWithTag("brkRing").GetComponentsInChildren<Rigidbody>())
+                     {
+                         rbBrnRing.isKinematic = false;
+                         rbBrnRing.AddForce(new Vector3(0,1,0)*50f);
+                         rbBrnRing.AddForce(new Vector3(0,0,1)*50f);
+                     }
             }
         }
     }
@@ -100,8 +104,6 @@ public class Ball : MonoBehaviour
                 stop = true;
                 Debug.Log("Load scene");
             }
-
-
         }
         if (col.gameObject.CompareTag(("Ground")))
         {

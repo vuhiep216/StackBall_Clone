@@ -49,7 +49,7 @@ public class Level : MonoBehaviour
             GameObject newRing = Instantiate(
                 ring,
                 new Vector3(0, i+0.05f, 0),
-                Quaternion.Euler(5,(i+1)*8f,0),
+                Quaternion.Euler(0,(i+1)*8f,0),
                 transform);
             ringList.Add(newRing);
         }
