@@ -8,11 +8,16 @@ using UnityEngine.UI;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] private Text lvThen;
     private GameObject ring;
     private GameObject core;
     public List<GameObject> ringList = new List<GameObject>();
     public int lv=1;
 
+    private void Awake()
+    {
+        lvThen.text = ("Level "+PlayerPrefs.GetInt("Level"));
+    }
 
     public void Start()
     {
@@ -31,18 +36,17 @@ public class Level : MonoBehaviour
         {
             PlayerPrefs.SetInt("Level",1);
         }
+        lvThen.text = ("Level "+PlayerPrefs.GetInt("Level"));
         lv=PlayerPrefs.GetInt("Level");
-            Debug.Log(lv);
-            if (lv > 2) lv = 2;
-            ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
-            ringSpawn(20);
-
+        Debug.Log("Level:"+lv);
+        if (lv > 2) lv = 2;
+        ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
+        ringSpawn(20);
     }
 
     void ringSpawn(int ringNum)
     {
         //ringList.Add(ring);
-        ring.transform.rotation = Quaternion.Euler(0,0, 0);
         for (int i = 0; i < ringNum; i++)
         {
 

@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class Ball : MonoBehaviour
 {
@@ -24,7 +25,6 @@ public class Ball : MonoBehaviour
     private int lvs;
 
     private Rigidbody rb;
-
 
 
     void Start()
@@ -63,23 +63,18 @@ public class Ball : MonoBehaviour
                 var ring1 = ring.ringList.Last();
                 transform.Translate(Vector3.down*spdDown*Time.deltaTime);
                 var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
-                if (ball.transform.position.y < (ring1.transform.position.y+1f))
+                if (ball.transform.position.y < (ring1.transform.position.y))
                 {
                     foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
                     {
                         ring1.GetComponent<Rings>().spinSpd = 0;
                         ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
-                        rbc.gameObject.layer = 3;
-
+                        rbc.isKinematic = false;
+                        rbc.velocity= new Vector3(0,1,0)*50f;
+                        rbc.velocity =new Vector3(0,0,1)*50f;
                     }
                     ring.ringList.Remove(ring.ringList.Last());
                 }
-                foreach( var rbBrnRing in GameObject.FindGameObjectWithTag("brkRing").GetComponentsInChildren<Rigidbody>())
-                     {
-                         rbBrnRing.isKinematic = false;
-                         rbBrnRing.AddForce(new Vector3(0,1,0)*50f);
-                         rbBrnRing.AddForce(new Vector3(0,0,1)*50f);
-                     }
             }
         }
     }
@@ -103,6 +98,11 @@ public class Ball : MonoBehaviour
                 failLevelUI.SetActive(true);
                 stop = true;
                 Debug.Log("Load scene");
+            }
+
+            if (col.gameObject.CompareTag("Point"))
+            {
+                col.gameObject.layer = 3;
             }
         }
         if (col.gameObject.CompareTag(("Ground")))

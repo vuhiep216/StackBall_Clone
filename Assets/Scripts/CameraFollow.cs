@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
+using Random = System.Random;
 
 public class CameraFollow : MonoBehaviour
 {
@@ -16,6 +17,10 @@ public class CameraFollow : MonoBehaviour
     {
         offset = transform.position - ball.transform.position;
         minY = ball.transform.position.y;
+        var r = 142f;
+        var g = 60f;
+        var b = 100f;
+        Camera.main.backgroundColor = new Color(r, g, b);
     }
 
     private void Update()
