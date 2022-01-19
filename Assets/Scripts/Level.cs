@@ -21,7 +21,7 @@ public class Level : MonoBehaviour
 
     public void Start()
     {
-        for (int i = 0 ;i < 30;i++)
+        for (var i = 0 ;i < 30;i++)
         {
             core = Resources.Load<GameObject>("Prefabs/Cores");
             GameObject newCore = Instantiate(
@@ -31,7 +31,7 @@ public class Level : MonoBehaviour
             transform);
         }
 
-    var check = PlayerPrefs.GetInt("Level");
+        var check = PlayerPrefs.GetInt("Level");
         if (check ==0)
         {
             PlayerPrefs.SetInt("Level",1);
@@ -47,10 +47,10 @@ public class Level : MonoBehaviour
     void ringSpawn(int ringNum)
     {
         //ringList.Add(ring);
-        for (int i = 0; i < ringNum; i++)
+        for (var i = 0; i < ringNum; i++)
         {
 
-            GameObject newRing = Instantiate(
+            var newRing = Instantiate(
                 ring,
                 new Vector3(0, i+0.05f, 0),
                 Quaternion.Euler(0,(i+1)*8f,0),

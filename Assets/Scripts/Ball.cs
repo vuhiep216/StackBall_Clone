@@ -10,12 +10,11 @@ using Random = System.Random;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private float jumpPwr;
-    //[SerializeField] private float dwnPwr;
     [SerializeField] public Level ring;
     [SerializeField] private float spdDown;
 
     public GameObject ball;
-    public GameObject completelevelUI;
+    public GameObject completeLevelUI;
     public GameObject failLevelUI;
 
     private bool click;
@@ -27,10 +26,10 @@ public class Ball : MonoBehaviour
     private Rigidbody rb;
 
 
-    void Start()
+    private void Start()
     {
         rb = ball.GetComponent<Rigidbody>();
-        completelevelUI.SetActive(false);
+        completeLevelUI.SetActive(false);
         failLevelUI.SetActive(false);
     }
 
@@ -52,31 +51,24 @@ public class Ball : MonoBehaviour
             click = false;
         }
 
-        if (click)
+        if (!click) return;
+        if (ring.ringList.Count <= 0) return;
+        disableRigid();
+        //rb.AddForce(Vector3.down*spdDown);
+        //rb.velocity = Vector3.down *dwnPwr;
+        var ring1 = ring.ringList.Last();
+        transform.Translate(Vector3.down*spdDown*Time.deltaTime);
+        var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
+        if (!(ball.transform.position.y < (ring1.transform.position.y))) return;
+        foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
         {
-
-            if (ring.ringList.Count>0)
-            {
-                disableRigid();
-                //rb.AddForce(Vector3.down*spdDown);
-                //rb.velocity = Vector3.down *dwnPwr;
-                var ring1 = ring.ringList.Last();
-                transform.Translate(Vector3.down*spdDown*Time.deltaTime);
-                var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
-                if (ball.transform.position.y < (ring1.transform.position.y))
-                {
-                    foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
-                    {
-                        ring1.GetComponent<Rings>().spinSpd = 0;
-                        ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
-                        rbc.isKinematic = false;
-                        rbc.velocity= new Vector3(0,1,0)*50f;
-                        rbc.velocity =new Vector3(0,0,1)*50f;
-                    }
-                    ring.ringList.Remove(ring.ringList.Last());
-                }
-            }
+            ring1.GetComponent<Rings>().spinSpd = 0;
+            ring1.transform.parent = GameObject.FindGameObjectWithTag("brkRing").transform;
+            rbc.isKinematic = false;
+            rbc.velocity = new Vector3(0,1,0)*50f;
+            rbc.velocity = new Vector3(0,0,1)*50f;
         }
+        ring.ringList.Remove(ring.ringList.Last());
     }
 
     void disableRigid()
@@ -105,11 +97,10 @@ public class Ball : MonoBehaviour
                 col.gameObject.layer = 3;
             }
         }
-        if (col.gameObject.CompareTag(("Ground")))
-        {
-            completelevelUI.SetActive(true);
-            stop = true;
-        }
+
+        if (!col.gameObject.CompareTag(("Ground"))) return;
+        completeLevelUI.SetActive(true);
+        stop = true;
     }
     public void PauseGame()
     {
