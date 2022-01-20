@@ -22,7 +22,7 @@ public class Background : MonoBehaviour
             filterMode = FilterMode.Bilinear
         };
         bgrTexture.SetPixels(new Color[]
-            {new Color32(r,g,b,255),new Color32(r1,g1,b1,255)});
+            {new Color32(r,g,b,255),new Color32(r1,g1,b1,155)});
         bgrTexture.Apply();
         img.texture = bgrTexture;
 

@@ -14,6 +14,7 @@ public class Level : MonoBehaviour
     public List<GameObject> ringList = new List<GameObject>();
     public int lv=1;
 
+
     private void Awake()
     {
         lvThen.text = ("Level "+PlayerPrefs.GetInt("Level"));
@@ -21,7 +22,7 @@ public class Level : MonoBehaviour
 
     public void Start()
     {
-        for (var i = 0 ;i < 30;i++)
+        for (var i = 0 ;i < 50;i++)
         {
             core = Resources.Load<GameObject>("Prefabs/Cores");
             GameObject newCore = Instantiate(
@@ -39,9 +40,9 @@ public class Level : MonoBehaviour
         lvThen.text = ("Level "+PlayerPrefs.GetInt("Level"));
         lv=PlayerPrefs.GetInt("Level");
         Debug.Log("Level:"+lv);
-        if (lv > 2) lv = 2;
+        if (lv > 4) lv = 4;
         ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
-        ringSpawn(20);
+        ringSpawn(40);
     }
 
     void ringSpawn(int ringNum)
@@ -49,7 +50,6 @@ public class Level : MonoBehaviour
         //ringList.Add(ring);
         for (var i = 0; i < ringNum; i++)
         {
-
             var newRing = Instantiate(
                 ring,
                 new Vector3(0, i+0.05f, 0),

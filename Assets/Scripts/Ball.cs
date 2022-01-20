@@ -10,8 +10,9 @@ using Random = System.Random;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private float jumpPwr;
-    [SerializeField] public Level ring;
+    [SerializeField] private Level ring;
     [SerializeField] private float spdDown;
+    [SerializeField] private Text Score;
 
     public GameObject ball;
     public GameObject completeLevelUI;
@@ -22,12 +23,19 @@ public class Ball : MonoBehaviour
     private bool stop=false;
 
     private int lvs;
+    private int point=0;
 
     private Rigidbody rb;
+
+    private float startTime;
+    private float holdTime;
+    private float endTime;
 
 
     private void Start()
     {
+        GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().enableEmission = false;
+        Score.text = ("Score: "+point);
         rb = ball.GetComponent<Rigidbody>();
         completeLevelUI.SetActive(false);
         failLevelUI.SetActive(false);
@@ -45,21 +53,26 @@ public class Ball : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             click = true;
+            startTime = Time.time;
         }
+        holdTime = Time.time - startTime;
+        Debug.Log(holdTime);
         if(Input.GetMouseButtonUp(0))
         {
             click = false;
+            endTime = Time.time;
         }
-
+        if(holdTime > 0.5f)
+        {
+            GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().enableEmission = true;
+        }
         if (!click) return;
         if (ring.ringList.Count <= 0) return;
         disableRigid();
-        //rb.AddForce(Vector3.down*spdDown);
-        //rb.velocity = Vector3.down *dwnPwr;
         var ring1 = ring.ringList.Last();
         transform.Translate(Vector3.down*spdDown*Time.deltaTime);
-        var rbb = GameObject.FindGameObjectWithTag("Ring").GetComponent<Rigidbody>();
         if (!(ball.transform.position.y < (ring1.transform.position.y))) return;
+        point+=5;
         foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
         {
             ring1.GetComponent<Rings>().spinSpd = 0;
@@ -69,6 +82,8 @@ public class Ball : MonoBehaviour
             rbc.velocity = new Vector3(0,0,1)*50f;
         }
         ring.ringList.Remove(ring.ringList.Last());
+        Score.text = ("Score: "+point);
+        holdTime = 0;
     }
 
     void disableRigid()
