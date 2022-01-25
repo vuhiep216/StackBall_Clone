@@ -1,19 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Level : MonoBehaviour
+public class Gameplay : MonoBehaviour
 {
     [SerializeField] private Text lvThen;
-    private GameObject ring;
-    private GameObject core;
+    private GameObject _ring;
+    private GameObject _core;
     public List<GameObject> ringList = new List<GameObject>();
     public int lv=1;
-
 
     private void Awake()
     {
@@ -24,9 +20,9 @@ public class Level : MonoBehaviour
     {
         for (var i = 0 ;i < 50;i++)
         {
-            core = Resources.Load<GameObject>("Prefabs/Cores");
-            GameObject newCore = Instantiate(
-            core,
+            _core = Resources.Load<GameObject>("Prefabs/Cores");
+            var newCore = Instantiate(
+            _core,
             new Vector3(0, i, 0),
             Quaternion.identity,
             transform);
@@ -41,17 +37,16 @@ public class Level : MonoBehaviour
         lv=PlayerPrefs.GetInt("Level");
         Debug.Log("Level:"+lv);
         if (lv > 4) lv = 4;
-        ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
-        ringSpawn(40);
+        _ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
+        RingSpawn(40);
     }
 
-    void ringSpawn(int ringNum)
+    private void RingSpawn(int ringNum)
     {
-        //ringList.Add(ring);
         for (var i = 0; i < ringNum; i++)
         {
             var newRing = Instantiate(
-                ring,
+                _ring,
                 new Vector3(0, i+0.05f, 0),
                 Quaternion.Euler(0,(i+1)*8f,0),
                 transform);

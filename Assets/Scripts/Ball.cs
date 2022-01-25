@@ -1,18 +1,27 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Random = System.Random;
-
 public class Ball : MonoBehaviour
 {
-    [SerializeField] private float jumpPwr;
-    [SerializeField] private Level ring;
-    [SerializeField] private float spdDown;
+    private enum State
+    {
+        Start,
+        Play,
+        Die,
+        Finish,
+    }
+
+    private State state=State.Start;
+
+    [SerializeField] private float jumpPower;
+    [SerializeField] private float bouncePwr;
+    [SerializeField] private Gameplay gamePlay;
+    [SerializeField] private float speedDown;
     [SerializeField] private Text Score;
+    [SerializeField] private Image furyProgressFill;
+    [SerializeField] private GameObject furyProgress;
+    //[SerializeField] private ParticleSystem flame;
 
     public GameObject ball;
     public GameObject completeLevelUI;
@@ -21,22 +30,26 @@ public class Ball : MonoBehaviour
     private bool click;
     private bool gameIsP;
     private bool stop=false;
+    private bool isFury;
 
     private int lvs;
     private int point=0;
 
     private Rigidbody rb;
 
-    private float startTime;
-    private float holdTime;
-    private float endTime;
+    private const float speedLimit = 5f;
+    private float furyTime;
 
+    private void Awake()
+    {
+        rb = ball.GetComponent<Rigidbody>();
+
+    }
 
     private void Start()
     {
-        GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().enableEmission = false;
+        state = State.Start;
         Score.text = ("Score: "+point);
-        rb = ball.GetComponent<Rigidbody>();
         completeLevelUI.SetActive(false);
         failLevelUI.SetActive(false);
     }
@@ -50,27 +63,119 @@ public class Ball : MonoBehaviour
         {
             Time.timeScale = 0;
         }
+        ClickCheck();
+        Move();
+        FuryCheck();
+        RingCheck();
+        Score.text = ("Score: "+point);
+    }
+
+    private void DisableRigid()
+    {
+        rb.useGravity = false;
+        var constraints = rb.constraints;
+        constraints = RigidbodyConstraints.FreezeAll;
+        constraints = ~RigidbodyConstraints.FreezePositionY;
+        rb.constraints = constraints;
+        rb.isKinematic = true;
+    }
+
+    private void OnCollisionEnter(Collision col)
+    {
+        if (click)
+        {
+            if (col.gameObject.CompareTag("Finish"))
+            {
+                if (isFury)
+                {
+                    col.gameObject.tag = "Point";
+                }
+                if (!isFury)
+                {
+                    failLevelUI.SetActive(true);
+                    stop = true;
+                    Debug.Log("Load scene");
+                }
+            }
+            if (col.gameObject.CompareTag("Point"))
+            {
+                col.gameObject.layer = 3;
+            }
+        }
+        if (!click)
+        {
+            rb.velocity = new Vector3(0,bouncePwr*Time.smoothDeltaTime,0);
+        }
+        if (!col.gameObject.CompareTag("Ground")) return;
+        completeLevelUI.SetActive(true);
+        stop = true;
+    }
+
+    private void ClickCheck()
+    {
         if (Input.GetMouseButtonDown(0))
         {
             click = true;
-            startTime = Time.time;
         }
-        holdTime = Time.time - startTime;
-        Debug.Log(holdTime);
-        if(Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             click = false;
-            endTime = Time.time;
         }
-        if(holdTime > 0.5f)
+    }
+
+    private void Move()
+    {
+        if (Input.GetMouseButton(0) && click == true)
         {
-            GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().enableEmission = true;
+            rb.velocity=new Vector3(0,-jumpPower*Time.deltaTime,0);
         }
+        if (rb.velocity.y > speedLimit)
+        {
+            rb.velocity = new Vector3(0, speedLimit, 0);
+        }
+    }
+    private void FuryCheck()
+    {
+        if (isFury)
+        {
+            furyTime -= Time.deltaTime*1.2f;
+        }
+        else
+        {
+            if (click)
+                furyTime += Time.deltaTime*1.2f;
+            else
+                furyTime -= Time.deltaTime*1.2f;
+        }
+
+        if (furyTime >= 1f)
+        {
+            furyTime = 1;
+            isFury = true;
+            GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().Play();
+        }
+        else if (furyTime <= 0 )
+        {
+            furyTime = 0;
+            isFury = false;
+            GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().Stop();
+        }
+        if (furyProgress.activeInHierarchy)
+            furyProgressFill.fillAmount=furyTime;
+    }
+
+    private void DestroyAnything()
+    {
+
+    }
+
+    private void RingCheck()
+    {
         if (!click) return;
-        if (ring.ringList.Count <= 0) return;
-        disableRigid();
-        var ring1 = ring.ringList.Last();
-        transform.Translate(Vector3.down*spdDown*Time.deltaTime);
+        if (gamePlay.ringList.Count <= 0) return;
+        DisableRigid();
+        var ring1 = gamePlay.ringList.Last();
+        transform.Translate(Vector3.down*speedDown*Time.deltaTime);
         if (!(ball.transform.position.y < (ring1.transform.position.y))) return;
         point+=5;
         foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
@@ -81,51 +186,6 @@ public class Ball : MonoBehaviour
             rbc.velocity = new Vector3(0,1,0)*50f;
             rbc.velocity = new Vector3(0,0,1)*50f;
         }
-        ring.ringList.Remove(ring.ringList.Last());
-        Score.text = ("Score: "+point);
-        holdTime = 0;
-    }
-
-    void disableRigid()
-    {
-        rb.useGravity = false;
-        rb.constraints = RigidbodyConstraints.FreezeAll;
-        rb.constraints = ~RigidbodyConstraints.FreezePositionY;
-        rb.isKinematic = true;
-    }
-
-    private void OnCollisionEnter(Collision col)
-    {
-        rb.velocity =Vector3.up *jumpPwr;
-        //var parent = GameObject.FindGameObjectWithTag("Ring");
-        if (click)
-        {
-            if (col.gameObject.CompareTag("Finish"))
-            {
-                failLevelUI.SetActive(true);
-                stop = true;
-                Debug.Log("Load scene");
-            }
-
-            if (col.gameObject.CompareTag("Point"))
-            {
-                col.gameObject.layer = 3;
-            }
-        }
-
-        if (!col.gameObject.CompareTag(("Ground"))) return;
-        completeLevelUI.SetActive(true);
-        stop = true;
-    }
-    public void PauseGame()
-    {
-        Time.timeScale = 0;
-        gameIsP = true;
-    }
-
-    public void ResumeGame()
-    {
-        Time.timeScale = 1;
-        gameIsP = false;
+        gamePlay.ringList.Remove(gamePlay.ringList.Last());
     }
 }
