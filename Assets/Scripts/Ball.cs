@@ -14,14 +14,13 @@ public class Ball : MonoBehaviour
 
     private State state=State.Start;
 
-    [SerializeField] private float jumpPower;
-    [SerializeField] private float bouncePwr;
+    [SerializeField] private float bouncePower;
     [SerializeField] private Gameplay gamePlay;
     [SerializeField] private float speedDown;
     [SerializeField] private Text Score;
     [SerializeField] private Image furyProgressFill;
+    [SerializeField] private Image furyProgressFillBackground;
     [SerializeField] private GameObject furyProgress;
-    //[SerializeField] private ParticleSystem flame;
 
     public GameObject ball;
     public GameObject completeLevelUI;
@@ -37,7 +36,7 @@ public class Ball : MonoBehaviour
 
     private Rigidbody rb;
 
-    private const float speedLimit = 5f;
+    private const float speedLimit = 10f;
     private float furyTime;
 
     private void Awake()
@@ -104,7 +103,7 @@ public class Ball : MonoBehaviour
         }
         if (!click)
         {
-            rb.velocity = new Vector3(0,bouncePwr*Time.smoothDeltaTime,0);
+            rb.velocity = new Vector3(0,bouncePower,0);
         }
         if (!col.gameObject.CompareTag("Ground")) return;
         completeLevelUI.SetActive(true);
@@ -125,9 +124,14 @@ public class Ball : MonoBehaviour
 
     private void Move()
     {
-        if (Input.GetMouseButton(0) && click == true)
+        if (click&&Input.GetMouseButtonDown(0))
         {
-            rb.velocity=new Vector3(0,-jumpPower*Time.deltaTime,0);
+            rb.velocity = new Vector3(0,-speedDown,0);
+            ball.transform.localScale = new Vector3(0.7f,0.7f,0.7f);
+        }
+        else
+        {
+            ball.transform.localScale = new Vector3(1f,1f,1f);
         }
         if (rb.velocity.y > speedLimit)
         {
@@ -160,22 +164,18 @@ public class Ball : MonoBehaviour
             isFury = false;
             GameObject.FindGameObjectWithTag("Flame").GetComponent<ParticleSystem>().Stop();
         }
-        if (furyProgress.activeInHierarchy)
-            furyProgressFill.fillAmount=furyTime;
+
+        if (!furyProgress.activeInHierarchy) return;
+        furyProgressFill.fillAmount=furyTime;
+        furyProgressFillBackground.fillAmount = furyTime;
     }
-
-    private void DestroyAnything()
-    {
-
-    }
-
     private void RingCheck()
     {
         if (!click) return;
         if (gamePlay.ringList.Count <= 0) return;
         DisableRigid();
         var ring1 = gamePlay.ringList.Last();
-        transform.Translate(Vector3.down*speedDown*Time.deltaTime);
+        transform.Translate(Vector3.down*speedDown*Time.smoothDeltaTime);
         if (!(ball.transform.position.y < (ring1.transform.position.y))) return;
         point+=5;
         foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())

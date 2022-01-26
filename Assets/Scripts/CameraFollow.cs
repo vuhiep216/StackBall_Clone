@@ -14,14 +14,11 @@ public class CameraFollow : MonoBehaviour
     private Vector3 offset;
     private bool isFlw;
 
-
-
-
-    void Start()
+    private void Start()
     {
-
-        offset = transform.position - ball.transform.position;
-        minY = ball.transform.position.y;
+        var position = ball.transform.position;
+        offset = transform.position - position;
+        minY = position.y;
 
     }
 

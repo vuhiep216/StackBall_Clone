@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 8201555442769370174}
   m_Layer: 0
   m_Name: default
-  m_TagString: Finish
+  m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -268,7 +268,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fcd53debd97db548a755a1ab1cdff16, type: 2}
+  - {fileID: 2100000, guid: 9aaebe13c1522224db0f9e642a702789, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

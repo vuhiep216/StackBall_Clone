@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 6548667192663791607}
   m_Layer: 0
   m_Name: default
-  m_TagString: Finish
+  m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -541,7 +541,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fcd53debd97db548a755a1ab1cdff16, type: 2}
+  - {fileID: 2100000, guid: b64c4c4ddbab49b4a9e459627b8e0bbd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -811,7 +811,7 @@ GameObject:
   - component: {fileID: 174092542621703604}
   m_Layer: 0
   m_Name: default
-  m_TagString: Finish
+  m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -857,7 +857,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fcd53debd97db548a755a1ab1cdff16, type: 2}
+  - {fileID: 2100000, guid: b64c4c4ddbab49b4a9e459627b8e0bbd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
