@@ -110,7 +110,6 @@ public class Ball : MonoBehaviour
         if (!click)
         {       
             rb.velocity = new Vector3(0,bouncePower,0);
-            ball.transform.localScale = new Vector3(1f, 0.5f, 1f);
         }
         if (!col.gameObject.CompareTag("Ground")) return;
         completeLevelUI.SetActive(true);
