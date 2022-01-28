@@ -17,7 +17,7 @@ public class Ball : MonoBehaviour
     [SerializeField] private float bouncePower;
     [SerializeField] private Gameplay gamePlay;
     [SerializeField] private float speedDown;
-    [SerializeField] private Text Score;
+    [SerializeField] private Text score;
     [SerializeField] private Image furyProgressFill;
     [SerializeField] private Image furyProgressFillBackground;
     [SerializeField] private GameObject furyProgress;
@@ -27,28 +27,27 @@ public class Ball : MonoBehaviour
     public GameObject failLevelUI;
 
     private bool click;
-    private bool gameIsP;
     private bool stop=false;
     private bool isFury;
 
-    private int lvs;
     private int point=0;
+    private int protectPlayer = 1;
 
     private Rigidbody rb;
 
-    private const float speedLimit = 10f;
+    private const float SpeedLimit = 10f;
     private float furyTime;
 
     private void Awake()
     {
         rb = ball.GetComponent<Rigidbody>();
-
+        GravityChange();
     }
 
     private void Start()
     {
         state = State.Start;
-        Score.text = ("Score: "+point);
+        score.text = ("Score: "+point);
         completeLevelUI.SetActive(false);
         failLevelUI.SetActive(false);
     }
@@ -65,8 +64,8 @@ public class Ball : MonoBehaviour
         ClickCheck();
         Move();
         FuryCheck();
-        RingCheck();
-        Score.text = ("Score: "+point);
+        RingCheckCollision();
+        score.text = ("Score: "+point);
     }
 
     private void DisableRigid()
@@ -85,6 +84,12 @@ public class Ball : MonoBehaviour
         {
             if (col.gameObject.CompareTag("Finish"))
             {
+                if (protectPlayer == 1)
+                {
+                    col.gameObject.tag = "Point";
+                    col.gameObject.GetComponent<Rigidbody>().velocity=Vector3.up;
+                    protectPlayer = 0;
+                }
                 if (isFury)
                 {
                     col.gameObject.tag = "Point";
@@ -96,14 +101,16 @@ public class Ball : MonoBehaviour
                     Debug.Log("Load scene");
                 }
             }
-            if (col.gameObject.CompareTag("Point"))
+            if (col.gameObject)
             {
                 col.gameObject.layer = 3;
+                col.gameObject.GetComponent<MeshCollider>().enabled=false;
             }
         }
         if (!click)
-        {
+        {       
             rb.velocity = new Vector3(0,bouncePower,0);
+            ball.transform.localScale = new Vector3(1f, 0.5f, 1f);
         }
         if (!col.gameObject.CompareTag("Ground")) return;
         completeLevelUI.SetActive(true);
@@ -122,6 +129,17 @@ public class Ball : MonoBehaviour
         }
     }
 
+    private void GravityChange()
+    {
+        if (click)
+        {
+            Physics.gravity = new Vector3(0f, -9.82f, 0f);
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0f, -30f, 0f);
+        }
+    }
     private void Move()
     {
         if (click&&Input.GetMouseButtonDown(0))
@@ -129,13 +147,10 @@ public class Ball : MonoBehaviour
             rb.velocity = new Vector3(0,-speedDown,0);
             ball.transform.localScale = new Vector3(0.7f,0.7f,0.7f);
         }
-        else
+        
+        if (rb.velocity.y > SpeedLimit)
         {
-            ball.transform.localScale = new Vector3(1f,1f,1f);
-        }
-        if (rb.velocity.y > speedLimit)
-        {
-            rb.velocity = new Vector3(0, speedLimit, 0);
+            rb.velocity = new Vector3(0, SpeedLimit, 0);
         }
     }
     private void FuryCheck()
@@ -169,7 +184,7 @@ public class Ball : MonoBehaviour
         furyProgressFill.fillAmount=furyTime;
         furyProgressFillBackground.fillAmount = furyTime;
     }
-    private void RingCheck()
+    private void RingCheckCollision()
     {
         if (!click) return;
         if (gamePlay.ringList.Count <= 0) return;
@@ -177,6 +192,7 @@ public class Ball : MonoBehaviour
         var ring1 = gamePlay.ringList.Last();
         transform.Translate(Vector3.down*speedDown*Time.smoothDeltaTime);
         if (!(ball.transform.position.y < (ring1.transform.position.y))) return;
+        protectPlayer = 1;
         point+=5;
         foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
         {

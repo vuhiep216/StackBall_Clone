@@ -1,12 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using Object = UnityEngine.Object;
-using Random = System.Random;
 
-public class CameraFollow : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
     public GameObject ball;
 
@@ -32,7 +26,7 @@ public class CameraFollow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isFlw = true || ball.transform.position.y < minY;
+        isFlw = true;
         if (ball.transform.position.y > minY)
         {
             isFlw = false;

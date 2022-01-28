@@ -7,8 +7,8 @@ using Random = System.Random;
 public class Gameplay : MonoBehaviour
 {
     [SerializeField] private Text lvThen;
-    private GameObject _ring;
-    private GameObject _core;
+    private GameObject ring;
+    private GameObject core;
     public List<GameObject> ringList = new List<GameObject>();
     public int lv=1;
 
@@ -27,10 +27,11 @@ public class Gameplay : MonoBehaviour
         for (var i = 0; i < ringNum; i++)
         {
             var newRing = Instantiate(
-                _ring,
+                ring,
                 new Vector3(0, i+0.05f, 0),
                 Quaternion.Euler(0,(i+1)*8f,0),
                 transform);
+            newRing.GetComponent<Rings>().Init();
             ringList.Add(newRing);
         }
 
@@ -41,13 +42,13 @@ public class Gameplay : MonoBehaviour
                 //Test Fury
             break;
             case 2:
-                ChallengeChange1();
+                ChallengeChange();
                 break;
             case 3:
-                ChallengeChange2();
+                ChallengeChange();
                 break;
             case 4:
-                ChallengeChange2();
+                ChallengeChange();
                 break;
         }
     }
@@ -67,9 +68,9 @@ public class Gameplay : MonoBehaviour
     {
         for (var i = 0 ;i < 50;i++)
         {
-            _core = Resources.Load<GameObject>("Prefabs/Cores");
+            core = Resources.Load<GameObject>("Prefabs/Cores");
             var newCore = Instantiate(
-                _core,
+                core,
                 new Vector3(0, i, 0),
                 Quaternion.identity,
                 transform);
@@ -83,40 +84,19 @@ public class Gameplay : MonoBehaviour
         lv=PlayerPrefs.GetInt("Level");
         Debug.Log("Level:"+lv);
         if (lv > 4) lv = 4;
-        _ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
+        ring = Resources.Load<GameObject>("Prefabs/LV"+lv);
         RingSpawn(40);
     }
-
-    private void ChallengeChange1()
+    
+    private void ChallengeChange()
     {
         for (var i = 10; i < 30; i++)
         {
-            var no = UnityEngine.Random.Range(0f, 360f);
-            if (i % 2 == 0)
-            {
-                ringList[i].transform.Rotate(0,60f,0);
-            }
-            else
-            {
-                ringList[i].transform.Rotate(0,90f,0);
-            }
-        }
-    }
+            var colorChange = GameObject.FindGameObjectWithTag("Point").GetComponent<MeshRenderer>();
+            var nameChange = GameObject.FindGameObjectsWithTag("Point");
+            colorChange.material.color = Color.black;
+            //nameChange[].tag = "";
 
-    private void ChallengeChange2()
-    {
-        for (var i = 10; i < 30; i++)
-        {
-            var no = UnityEngine.Random.Range(0f, 360f);
-            var becomeGood = UnityEngine.Random.Range(10f, 30f);
-            if (i % 2 == 0)
-            {
-                ringList[i].transform.Rotate(0,no,0);
-            }
-            else
-            {
-                ringList[i].transform.Rotate(0,no*2f,0);
-            }
         }
 
     }

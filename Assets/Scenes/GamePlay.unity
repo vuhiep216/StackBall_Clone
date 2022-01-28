@@ -1204,10 +1204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a417fff7f3301cd4096bcc6c72a49e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bouncePower: 7.5
+  bouncePower: 10
   gamePlay: {fileID: 996134393}
   speedDown: 30
-  Score: {fileID: 627874113}
+  score: {fileID: 627874113}
   furyProgressFill: {fileID: 1374940128}
   furyProgressFillBackground: {fileID: 1905073104}
   furyProgress: {fileID: 2070474579}

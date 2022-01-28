@@ -29,9 +29,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 565874713124925917}
-  - {fileID: 8107259842068169773}
   - {fileID: 5642562428733374817}
   - {fileID: 9179687983788927177}
+  - {fileID: 8107259842068169773}
   m_Father: {fileID: 869279601978061880}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 4813359181957140841}
   - component: {fileID: 7384718273602894874}
   m_Layer: 0
-  m_Name: default
+  m_Name: P1
   m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,6 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpd: 240
+  point: {fileID: 833879311623017866}
 --- !u!1 &3121943821838390326
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,7 +221,7 @@ GameObject:
   - component: {fileID: 489240204758035576}
   m_Layer: 0
   m_Name: default
-  m_TagString: Finish
+  m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -266,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8fcd53debd97db548a755a1ab1cdff16, type: 2}
+  - {fileID: 2100000, guid: e5da8a987b14ac943919cebb1c5d4512, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -332,7 +333,7 @@ GameObject:
   - component: {fileID: 2208173796319469873}
   - component: {fileID: 7581371437533375128}
   m_Layer: 0
-  m_Name: default
+  m_Name: P2
   m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +575,7 @@ Transform:
   m_Children:
   - {fileID: 3052502398649460954}
   m_Father: {fileID: 7147171934369653918}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &2524969134155165134
 BoxCollider:
@@ -600,7 +601,7 @@ GameObject:
   - component: {fileID: 8107259842068169773}
   - component: {fileID: 1167777321044264716}
   m_Layer: 0
-  m_Name: F2
+  m_Name: P3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -619,7 +620,7 @@ Transform:
   m_Children:
   - {fileID: 5467258193803314572}
   m_Father: {fileID: 7147171934369653918}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!65 &1167777321044264716
 BoxCollider:
@@ -664,7 +665,7 @@ Transform:
   m_Children:
   - {fileID: 7726824728866111407}
   m_Father: {fileID: 7147171934369653918}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &2280618960919388670
 BoxCollider:
