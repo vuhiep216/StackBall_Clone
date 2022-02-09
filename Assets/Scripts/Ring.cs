@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class Ring : MonoBehaviour
 {
-    //nothing to do
-    public GameObject _target;
+    public List<GameObject> listRing = new List<GameObject>();
 }

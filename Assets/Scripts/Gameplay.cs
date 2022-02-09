@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
@@ -33,8 +35,8 @@ public class Gameplay : MonoBehaviour
                 new Vector3(0, i+0.05f, 0),
                 Quaternion.Euler(0,(i+1)*8f,0),
                 transform);
-            //newRing.GetComponent<Rings>().Init();
-            ringList.Add(newRing);
+                //newRing.GetComponent<Ring>().Init();
+                ringList.Add(newRing);
         }
 
         var difficult = PlayerPrefs.GetInt("Level");
@@ -94,16 +96,15 @@ public class Gameplay : MonoBehaviour
     {
         for (var i = 10; i < 30; i++)
         {
-            var item = ringList[i].GetComponentsInChildren<GameObject>();
-            foreach (var points in item)
+            var pList = ringList[i].gameObject.GetComponentsInChildren<Renderer>();
+            for (var lv = 0; lv < PlayerPrefs.GetInt("Level"); lv++)
             {
-                var point = GameObject.FindGameObjectsWithTag("Point");
-                foreach (var p in point)
-                {
-                    p.GetComponent<Renderer>().material.color=Color.black;
-                    p.tag = "Finish";
-                }
+                int random;
+                random = UnityEngine.Random.Range(0, pList.Length);
+                pList[random].material.color=Color.black;
+                pList[random].tag = "Finish";
             }
+            
         }
     }
 }
