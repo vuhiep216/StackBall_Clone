@@ -13,7 +13,6 @@ public class Gameplay : MonoBehaviour
     private GameObject ring;
     private GameObject core;
     public List<GameObject> ringList = new List<GameObject>();
-    public List<GameObject> pointList = new List<GameObject>();
     public int lv=1;
 
     private void Awake()

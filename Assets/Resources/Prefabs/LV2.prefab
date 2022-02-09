@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7884c387562c2a6429d48a4e2b210339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
+  listRing: []
 --- !u!1 &833879311623017866
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,6 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 869279601978061880}
   - component: {fileID: 869279601978061881}
+  - component: {fileID: 1500015830702323435}
   m_Layer: 0
   m_Name: LV2
   m_TagString: Rings
@@ -208,12 +209,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpd: 240
-  listRing:
-  - {fileID: 833879311623017866}
-  - {fileID: 4634097629270579357}
-  - {fileID: 3718867661316214191}
-  - {fileID: 3121943821838390326}
-  - {fileID: 1663503345510788599}
+--- !u!95 &1500015830702323435
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869279601978061886}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ff4b390aec3bd5a419cd1d3f22703b1c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1663503345510788599
 GameObject:
   m_ObjectHideFlags: 0

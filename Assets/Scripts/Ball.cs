@@ -86,8 +86,9 @@ public class Ball : MonoBehaviour
             {
                 if (protectPlayer == 1)
                 {
-                    col.gameObject.tag = "Point";
-                    gameObject.GetComponent<Rigidbody>().velocity=Vector3.up*50f;
+                    col.gameObject.GetComponentInParent<Animator>().Play("Bloom");
+                    click = false;
+                    ball.GetComponent<Rigidbody>().velocity = Vector3.up*5f;
                     protectPlayer = 0;
                 }
                 if (isFury)
