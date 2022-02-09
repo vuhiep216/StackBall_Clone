@@ -87,7 +87,7 @@ public class Ball : MonoBehaviour
                 if (protectPlayer == 1)
                 {
                     col.gameObject.tag = "Point";
-                    col.gameObject.GetComponent<Rigidbody>().velocity=Vector3.up;
+                    gameObject.GetComponent<Rigidbody>().velocity=Vector3.up*50f;
                     protectPlayer = 0;
                 }
                 if (isFury)
@@ -104,7 +104,6 @@ public class Ball : MonoBehaviour
             if (col.gameObject)
             {
                 col.gameObject.layer = 3;
-                col.gameObject.GetComponent<MeshCollider>().enabled=false;
             }
         }
         if (!click)
@@ -121,10 +120,12 @@ public class Ball : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             click = true;
+            ball.gameObject.GetComponent<Animator>().enabled = false;
         }
         if (Input.GetMouseButtonUp(0))
         {
             click = false;
+            ball.gameObject.GetComponent<Animator>().enabled = true;
         }
     }
 

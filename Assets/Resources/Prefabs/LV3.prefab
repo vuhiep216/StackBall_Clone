@@ -367,7 +367,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpd: 240
-  point: {fileID: 1093619538045738991}
+  point: {fileID: 280755966325878241}
 --- !u!1 &1093619538045738991
 GameObject:
   m_ObjectHideFlags: 0

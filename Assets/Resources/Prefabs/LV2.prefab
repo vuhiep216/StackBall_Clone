@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7884c387562c2a6429d48a4e2b210339, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _target: {fileID: 0}
 --- !u!1 &833879311623017866
 GameObject:
   m_ObjectHideFlags: 0
@@ -207,7 +208,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpd: 240
-  point: {fileID: 3121943821838390326}
+  listRing:
+  - {fileID: 833879311623017866}
+  - {fileID: 4634097629270579357}
+  - {fileID: 3718867661316214191}
+  - {fileID: 3121943821838390326}
+  - {fileID: 1663503345510788599}
 --- !u!1 &1663503345510788599
 GameObject:
   m_ObjectHideFlags: 0

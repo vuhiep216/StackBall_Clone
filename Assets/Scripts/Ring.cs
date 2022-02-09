@@ -5,4 +5,5 @@ using UnityEngine;
 public class Ring : MonoBehaviour
 {
     //nothing to do
+    public GameObject _target;
 }

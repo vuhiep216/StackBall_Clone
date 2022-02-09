@@ -61,7 +61,7 @@ GameObject:
   - component: {fileID: 4813359181957140841}
   - component: {fileID: 7384718273602894874}
   m_Layer: 0
-  m_Name: P1
+  m_Name: default
   m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpd: 240
-  point: {fileID: 833879311623017866}
+  point: {fileID: 280755966325878241}
 --- !u!1 &3121943821838390326
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ GameObject:
   - component: {fileID: 2208173796319469873}
   - component: {fileID: 7581371437533375128}
   m_Layer: 0
-  m_Name: P2
+  m_Name: default
   m_TagString: Point
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

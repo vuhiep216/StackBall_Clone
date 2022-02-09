@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = System.Random;
@@ -10,6 +11,7 @@ public class Gameplay : MonoBehaviour
     private GameObject ring;
     private GameObject core;
     public List<GameObject> ringList = new List<GameObject>();
+    public List<GameObject> pointList = new List<GameObject>();
     public int lv=1;
 
     private void Awake()
@@ -31,7 +33,7 @@ public class Gameplay : MonoBehaviour
                 new Vector3(0, i+0.05f, 0),
                 Quaternion.Euler(0,(i+1)*8f,0),
                 transform);
-            newRing.GetComponent<Rings>().Init();
+            //newRing.GetComponent<Rings>().Init();
             ringList.Add(newRing);
         }
 
@@ -92,12 +94,16 @@ public class Gameplay : MonoBehaviour
     {
         for (var i = 10; i < 30; i++)
         {
-            var colorChange = GameObject.FindGameObjectWithTag("Point").GetComponent<MeshRenderer>();
-            var nameChange = GameObject.FindGameObjectsWithTag("Point");
-            colorChange.material.color = Color.black;
-            //nameChange[].tag = "";
-
+            var item = ringList[i].GetComponentsInChildren<GameObject>();
+            foreach (var points in item)
+            {
+                var point = GameObject.FindGameObjectsWithTag("Point");
+                foreach (var p in point)
+                {
+                    p.GetComponent<Renderer>().material.color=Color.black;
+                    p.tag = "Finish";
+                }
+            }
         }
-
     }
 }
