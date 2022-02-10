@@ -31,7 +31,7 @@ public class Ball : MonoBehaviour
     private bool isFury;
 
     private int point=0;
-    private int protectPlayer = 1;
+    private int protectPlayer;
 
     private Rigidbody rb;
 
@@ -46,7 +46,7 @@ public class Ball : MonoBehaviour
 
     private void Start()
     {
-        state = State.Start;
+        protectPlayer = 1;
         score.text = ("Score: "+point);
         completeLevelUI.SetActive(false);
         failLevelUI.SetActive(false);
@@ -84,27 +84,29 @@ public class Ball : MonoBehaviour
         {
             if (col.gameObject.CompareTag("Finish"))
             {
-                if (protectPlayer == 1)
+                if (protectPlayer==1)
                 {
-                    col.gameObject.GetComponentInParent<Animator>().Play("Bloom");
-                    click = false;
-                    ball.GetComponent<Rigidbody>().velocity = Vector3.up*5f;
-                    protectPlayer = 0;
+                    col.transform.parent.gameObject.GetComponentInParent<Animator>().Play("Bloom");
+                    rb.velocity = new Vector3(0, bouncePower, 0);
+                    protectPlayer=0;
                 }
-                if (isFury)
+                else
                 {
-                    col.gameObject.tag = "Point";
+                    if (isFury)
+                    {
+                        col.gameObject.tag = "Point";
+                    }
+                    if (!isFury)
+                    {
+                        failLevelUI.SetActive(true);
+                        stop = true;
+                        Debug.Log("Load scene");
+                    }
                 }
-                if (!isFury)
+                if (col.gameObject)
                 {
-                    failLevelUI.SetActive(true);
-                    stop = true;
-                    Debug.Log("Load scene");
+                    col.gameObject.layer = 3;
                 }
-            }
-            if (col.gameObject)
-            {
-                col.gameObject.layer = 3;
             }
         }
         if (!click)
@@ -143,7 +145,7 @@ public class Ball : MonoBehaviour
     }
     private void Move()
     {
-        if (click&&Input.GetMouseButtonDown(0))
+        if (click)
         {
             rb.velocity = new Vector3(0,-speedDown,0);
             ball.transform.localScale = new Vector3(0.7f,0.7f,0.7f);
@@ -185,6 +187,7 @@ public class Ball : MonoBehaviour
         furyProgressFill.fillAmount=furyTime;
         furyProgressFillBackground.fillAmount = furyTime;
     }
+    
     private void RingCheckCollision()
     {
         if (!click) return;
@@ -193,7 +196,6 @@ public class Ball : MonoBehaviour
         var ring1 = gamePlay.ringList.Last();
         transform.Translate(Vector3.down*speedDown*Time.smoothDeltaTime);
         if (!(ball.transform.position.y < (ring1.transform.position.y))) return;
-        protectPlayer = 1;
         point+=5;
         foreach (var rbc in ring1.GetComponentsInChildren<Rigidbody>())
         {

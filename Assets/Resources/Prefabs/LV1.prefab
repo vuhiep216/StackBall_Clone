@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7147171934369653918}
   - component: {fileID: 6981488082329452659}
-  - component: {fileID: 4447157128764956466}
+  - component: {fileID: 4869536290807002593}
   m_Layer: 0
   m_Name: Ring
   m_TagString: Ring
@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listRing: []
---- !u!95 &4447157128764956466
+--- !u!95 &4869536290807002593
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -59,7 +59,7 @@ Animator:
   m_GameObject: {fileID: 280755966325878241}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 389b3d094c8c0f64d854d918ee901ac4, type: 2}
+  m_Controller: {fileID: 9100000, guid: e99a5bd5e6ff2b940942d738ddb5af16, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

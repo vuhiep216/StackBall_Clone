@@ -168,6 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7147171934369653918}
   - component: {fileID: 6981488082329452659}
+  - component: {fileID: 2740632853687064011}
   m_Layer: 0
   m_Name: Ring
   m_TagString: Ring
@@ -210,6 +211,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   listRing: []
+--- !u!95 &2740632853687064011
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 280755966325878241}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51f38d9c19a473b41b156b02a6b6385a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &833879311623017866
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +353,6 @@ GameObject:
   m_Component:
   - component: {fileID: 869279601978061880}
   - component: {fileID: 869279601978061881}
-  - component: {fileID: 2420628994385677685}
   m_Layer: 0
   m_Name: LV3
   m_TagString: Rings
@@ -369,25 +388,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spinSpd: 240
---- !u!95 &2420628994385677685
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869279601978061886}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c8d594caad3d754429fc358bdeadf86a, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1093619538045738991
 GameObject:
   m_ObjectHideFlags: 0
